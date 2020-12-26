@@ -22,3 +22,5 @@ Route::post('/product', 'ProductController@post');
 Route::put('/product/{id}', 'ProductController@put');
 
 Route::delete('/product/{id}', 'ProductController@delete');
+
+Route::get('/products/search/{name}', 'ProductController@search');

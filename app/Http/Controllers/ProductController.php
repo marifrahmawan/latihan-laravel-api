@@ -9,6 +9,8 @@ class ProductController extends Controller
 {
     public function get(){
         $data = Product::all();
+
+        // return $data;
         return response()->json(
             [
                 "message" => "GET Product Success",
@@ -81,7 +83,26 @@ class ProductController extends Controller
                     "message" => "Product ".$id." Not Found"
                 ], 400
             );
+        }        
+    }
+
+    public function search($name){
+        $product = Product::where('name', 'like', '%'.$name.'%')->get();
+
+        if(count($product) > 0){
+            return response()->json(
+                [
+                    "message" => "Products with name ".$name." found",
+                    "data" => $product
+                ]
+            );
         }
-        
+        else{
+            return response()->json(
+                [
+                    "message" => "Products with name ".$name." not found",
+                ]
+            );
+        }
     }
 }
